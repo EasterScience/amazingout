@@ -1,9 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Amazing Out</title>
-    </head>
-    <body>
-        <h1>Hello Welcome to Amazing Out</h1>
-    </body>
+<html>
+<head>
+    <title>Read JSON File</title>
+</head>
+<body>
+    <h1>JSON Data</h1>
+    <pre id="json-data"></pre>
+
+    <script>
+        fetch("./data.json")
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+        })
+        console.log('Console Log is working')
+    </script>
+</body>
 </html>
