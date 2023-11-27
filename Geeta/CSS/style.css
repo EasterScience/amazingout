@@ -1,0 +1,160 @@
+#slider {
+    width: 60%;
+    height: 700px;
+    margin: auto;
+    margin-top: 100px;
+    box-shadow: 0px 0px 3px grey;
+    overflow: hidden;
+    position: relative;
+    
+  }
+  
+ .slide {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    text-align: center;
+    
+    position: absolute;
+  }
+  
+  .sloka {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 20px;
+    padding: auto;
+    padding-inline: 15%;
+    
+    
+  }
+  
+  .meaning {
+    font-size: 16px;
+    padding-top: 50px;
+    padding: auto;
+    padding-inline: 5%;
+  }
+  .e_meaning {
+    font-size: 16px;
+    padding-top: 50px;
+    padding: auto;
+    padding-inline: 5%;
+    font-style: italic;
+  }
+
+
+#control-button {
+  margin: auto;
+  width: 50%;
+  margin-top: 20px;
+  height: 50px;
+  box-shadow: 0px 0px 0px red;
+  position: relative;
+}
+
+#previous-button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #04AA6D;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  transition: all 0.5s;
+  width: 110px;
+  
+}
+
+#previous-button:hover {background-color: #3e8e41}
+
+#previous-button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(6px);
+}
+
+#previous-button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+#previous-button span:after {
+  content: '\00ab';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: -20px;
+  transition: 0.5s;
+}
+
+#previous-button:hover span {
+  padding-left: 25px;
+}
+
+#previous-button:hover span:after {
+  opacity: 1;
+  left: 0px;
+}
+
+
+
+
+
+#next-button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #04AA6D;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  transition: all 0.5s;
+  width: 110px;
+  float: right;
+}
+
+#next-button:hover {background-color: #3e8e41}
+
+#next-button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(6px);
+}
+
+#next-button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+#next-button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+#next-button:hover span {
+  padding-right: 25px;
+}
+
+#next-button:hover span:after {
+  opacity: 1;
+  right: 0;
+}

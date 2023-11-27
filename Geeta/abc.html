@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Slider</title>
+    <style>
+        #slider-container {
+            width: 60%;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div id="slider-container">
+    <p id="text-display">Initial Text</p>
+    <button onclick="prevText()">Previous</button>
+    <button onclick="nextText()">Next</button>
+</div>
+
+<script>
+    const textArray = ['Text 1', 'Text 2', 'Text 3', 'Text 4']; // Replace with your text content
+    let currentIndex = 0;
+
+    // Function to update the displayed text
+    function updateText() {
+        const textDisplay = document.getElementById('text-display');
+        textDisplay.textContent = textArray[currentIndex];
+    }
+
+    // Function to go to the next text
+    function nextText() {
+        currentIndex = (currentIndex + 1) % textArray.length;
+        updateText();
+    }
+
+    // Function to go to the previous text
+    function prevText() {
+        currentIndex = (currentIndex - 1 + textArray.length) % textArray.length;
+        updateText();
+    }
+
+    // Initial text display
+    updateText();
+</script>
+
+</body>
+</html>

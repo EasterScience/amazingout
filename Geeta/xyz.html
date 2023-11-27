@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #slider {
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+        }
+    </style>
+    <title>Text Slider</title>
+</head>
+<body>
+
+<div id="slider">
+    <!-- Slides will be dynamically added here -->
+</div>
+
+<script>
+    // Your array of text slides
+    const slides = [
+        "Slide 1: Your text here.",
+        "Slide 2: Another text.",
+        // ... (add more slides)
+        "Slide 1000+: More text slides.",
+    ];
+
+    // Function to create a slide element
+    function createSlide(text) {
+        const slide = document.createElement("div");
+        slide.classList.add("slide");
+        slide.textContent = text;
+        return slide;
+    }
+
+    // Function to initialize the slider
+    function initSlider() {
+        const sliderContainer = document.getElementById("slider");
+
+        // Create and append slide elements to the slider container
+        slides.forEach((text, index) => {
+            const slide = createSlide(text);
+            sliderContainer.appendChild(slide);
+        });
+
+        // Display the first slide
+        showSlide(0);
+    }
+
+    // Function to show a specific slide
+    function showSlide(index) {
+        const slides = document.querySelectorAll(".slide");
+
+        // Hide all slides
+        slides.forEach(slide => {
+            slide.style.display = "none";
+        });
+
+        // Display the selected slide
+        slides[index].style.display = "block";
+    }
+
+    // Initialize the slider
+    initSlider();
+</script>
+
+</body>
+</html>
