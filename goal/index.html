@@ -29,19 +29,16 @@
 <body>
 
 <div id="timer">
-  <div class="timer-section" id="days">00</div>
-  <div class="timer-section">Days</div>
-  <div class="timer-section" id="months">00</div>
-  <div class="timer-section">Months</div>
+  <div class="timer-section"><span id="days">00</span> Days</div>
+  <div class="timer-section"><span  id="months">00</span> Months</div>
+  <br/><br/>
   <div class="timer-section" id="time">00:00:00</div>
-  <br/>
-  <br/>
-  <div class="timer-section" id="per_day"> &#8377; 4,632 /day</div>
-   <br/> <br/>
+  <br/><br/>
+  <div class="timer-section"> &#8377; <span id="per_day">4,632</span> /day</div>
+   <br/><br/>
   <div class="timer-section">&#8377; <span id="earn_money">1,00,000</span></div>
    <div class="timer-section">&#8377; <span id="goal_price">1,00,00,000</span></div>
-  <br/>
-  <br/>
+  <br/><br/>
   <label for="file"><span id="save_per">2</span>%</label>
   <progress id="file" value="" max="100"> 32% </progress>
 </div>
@@ -56,7 +53,7 @@
     const timeRemaining = targetDate - now;
 
     // Calculate days, months, and time
-    const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+    var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
     const months = Math.floor(days / 30);
     const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
@@ -67,6 +64,14 @@
     document.getElementById('months').innerText = months;
     document.getElementById('time').innerText = `${hours}:${minutes}:${seconds}`;
   }, 1000);
+
+  const now = new Date().getTime();
+  const timeRemaining = targetDate - now;
+  // Calculate days
+  const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+  //const days = document.getElementById('days').innerText;
+  //console.log("hi", days);
+  
   const goal_price = 10000000;
   const total_price = 250000;
   const total_percentage = ((total_price * 100) / goal_price) ;
@@ -75,6 +80,7 @@
   document.getElementById('file').value = total_percentage;
   document.getElementById('goal_price').innerText = goal_price.toLocaleString('en-US');
   document.getElementById('earn_money').innerText = total_price.toLocaleString('en-US');
+  document.getElementById('per_day').innerText = ((goal_price-total_price)/days).toLocaleString('en-US');
   
   
 </script>
