@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      margin: 50px;
+    }
+
+    #timer {
+      font-size: 24px;
+      color: #333;
+    }
+
+    .timer-section {
+      display: inline-block;
+      margin: 0 10px;
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+<div id="timer">
+  <div class="timer-section" id="days">00</div>
+  <div class="timer-section">Days</div>
+  <div class="timer-section" id="months">00</div>
+  <div class="timer-section">Months</div>
+  <div class="timer-section" id="time">00:00:00</div>
+  <br/>
+  <br/>
+  <div class="timer-section" id="per_day"> &#8377; 4,632 /day</div>
+   <br/> <br/>
+  <div class="timer-section">&#8377; <span id="earn_money">1,00,000</span></div>
+   <div class="timer-section">&#8377; <span id="goal_price">1,00,00,000</span></div>
+  <br/>
+  <br/>
+  <label for="file"><span id="save_per">2</span>%</label>
+  <progress id="file" value="" max="100"> 32% </progress>
+</div>
+
+<script>
+  // Set the date to countdown to (replace with your desired date)
+  const targetDate = new Date('2030-02-04T23:59:59').getTime();
+
+  // Update the timer every second
+  setInterval(function () {
+    const now = new Date().getTime();
+    const timeRemaining = targetDate - now;
+
+    // Calculate days, months, and time
+    const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+    const months = Math.floor(days / 30);
+    const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+    // Update the HTML elements
+    document.getElementById('days').innerText = days;
+    document.getElementById('months').innerText = months;
+    document.getElementById('time').innerText = `${hours}:${minutes}:${seconds}`;
+  }, 1000);
+  const goal_price = 10000000;
+  const total_price = 250000;
+  const total_percentage = ((total_price * 100) / goal_price) ;
+  
+  document.getElementById('save_per').innerText = total_percentage;
+  document.getElementById('file').value = total_percentage;
+  document.getElementById('goal_price').innerText = goal_price.toLocaleString('en-US');
+  document.getElementById('earn_money').innerText = total_price.toLocaleString('en-US');
+  
+  
+</script>
+
+</body>
+</html>
