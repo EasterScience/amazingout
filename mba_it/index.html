@@ -22,12 +22,7 @@
       border-radius: 10px;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 1rem;
-      color: #4CAF50;
-    }
-    h2 {
+    h1, h2 {
       text-align: center;
       margin-bottom: 1rem;
       color: #4CAF50;
@@ -62,6 +57,10 @@
 
     /* Responsive styles */
     @media (max-width: 768px) {
+      .container {
+        padding: 0.5rem;
+      }
+
       table {
         font-size: 0.8rem;
       }
@@ -72,21 +71,45 @@
     }
 
     @media (max-width: 480px) {
-      table, th, td {
+      table {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tbody {
         display: block;
         width: 100%;
       }
 
-      th {
-        display: none;
+      tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        background: #fff;
       }
 
       td {
         display: flex;
         justify-content: space-between;
+        padding: 0.8rem;
         border: none;
         border-bottom: 1px solid #ddd;
-        padding: 0.5rem;
+      }
+
+      td:last-child {
+        border-bottom: none;
+      }
+
+      td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #333;
       }
     }
   </style>
@@ -143,11 +166,11 @@
 
         const row = `
           <tr>
-            <td>${examDate.toDateString()}</td>
-            <td>${exam.day}</td>
-            <td>${exam.subject}</td>
-            <td class="countdown">${countdownText}</td>
-            <td>${exam.daysToPrepare}</td>
+            <td data-label="Exam Date">${examDate.toDateString()}</td>
+            <td data-label="Day">${exam.day}</td>
+            <td data-label="Subject">${exam.subject}</td>
+            <td data-label="Time Left" class="countdown">${countdownText}</td>
+            <td data-label="Days to Prepare">${exam.daysToPrepare}</td>
           </tr>
         `;
         tableBody.insertAdjacentHTML('beforeend', row);
