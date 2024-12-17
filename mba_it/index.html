@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam Countdown</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f8fc;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #4CAF50;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #4CAF50;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding: 0.8rem;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background: #4CAF50;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    tr:nth-child(even) {
+      background: #f2f2f2;
+    }
+
+    .countdown {
+      font-weight: bold;
+      color: #e91e63;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      table {
+        font-size: 0.8rem;
+      }
+
+      th, td {
+        padding: 0.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      table, th, td {
+        display: block;
+        width: 100%;
+      }
+
+      th {
+        display: none;
+      }
+
+      td {
+        display: flex;
+        justify-content: space-between;
+        border: none;
+        border-bottom: 1px solid #ddd;
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Exam Countdown</h1>
+    <h2>Exam Time: (2:00 PM - 5:00 PM)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Exam Date</th>
+          <th>Day</th>
+          <th>Subject</th>
+          <th>Time Left</th>
+          <th>Days to Prepare</th>
+        </tr>
+      </thead>
+      <tbody id="exam-table">
+        <!-- Table rows will be generated dynamically -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const exams = [
+      { date: '2025-01-08', day: 'Wednesday', subject: 'Strategic Management', daysToPrepare: 0 },
+      { date: '2025-01-10', day: 'Friday', subject: 'Universal Human Values & Professional Ethics', daysToPrepare: 1 },
+      { date: '2025-01-17', day: 'Friday', subject: 'AI and ML for Business', daysToPrepare: 6 },
+      { date: '2025-01-20', day: 'Monday', subject: 'Data Analytics for Business Decisions', daysToPrepare: 2 },
+      { date: '2025-01-31', day: 'Friday', subject: 'Employee Relations and Labour Laws', daysToPrepare: 10 },
+      { date: '2025-02-01', day: 'Saturday', subject: 'Innovation & Entrepreneurship', daysToPrepare: 0 },
+      { date: '2025-02-03', day: 'Monday', subject: 'Talent Management', daysToPrepare: 1 }
+    ];
+
+    function updateCountdown() {
+      const tableBody = document.getElementById('exam-table');
+      tableBody.innerHTML = ''; // Clear existing table rows
+
+      exams.forEach((exam) => {
+        const now = new Date();
+        const examDate = new Date(exam.date);
+        const timeDiff = examDate - now;
+
+        let countdownText = '';
+        if (timeDiff <= 0) {
+          countdownText = 'Exam Started!';
+        } else {
+          const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+          countdownText = `${days}d ${hours}h ${minutes}m`;
+        }
+
+        const row = `
+          <tr>
+            <td>${examDate.toDateString()}</td>
+            <td>${exam.day}</td>
+            <td>${exam.subject}</td>
+            <td class="countdown">${countdownText}</td>
+            <td>${exam.daysToPrepare}</td>
+          </tr>
+        `;
+        tableBody.insertAdjacentHTML('beforeend', row);
+      });
+    }
+
+    // Update the table every minute
+    setInterval(updateCountdown, 60000);
+    updateCountdown(); // Run immediately on page load
+  </script>
+</body>
+</html>
