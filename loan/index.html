@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Details</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .details {
+            line-height: 1.6;
+        }
+        canvas {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Loan Details</h2>
+        <div class="details">
+            <p><strong>Loan Term:</strong> 25 years</p>
+            <p><strong>Loan Amount:</strong> ₹37.6 lakh</p>
+            <p><strong>Interest Rate:</strong> 8.24% per annum</p>
+            <p><strong>Start Date:</strong> February 2025</p>
+            <p><strong>EMI Date:</strong> 10th of every month</p>
+            <p><strong>EMI Amount:</strong> ₹31,000</p>
+            <p><strong>Total EMIs Remaining:</strong> <span id="totalEMIs"></span></p>
+        </div>
+        <canvas id="loanChart"></canvas>
+        <canvas id="pieChart"></canvas>
+    </div>
+
+    <script>
+        function generateChartData(P, r, emi) {
+            let balance = P;
+            let data = [];
+            let month = 0;
+            let totalInterest = 0;
+            while (balance > 0) {
+                let interest = balance * (r / 12 / 100);
+                let principal = emi - interest;
+                balance -= principal;
+                balance = balance < 0 ? 0 : balance;
+                totalInterest += interest;
+                data.push({ month: ++month, balance: balance, interest: interest });
+            }
+            return { data, totalInterest, totalMonths: month };
+        }
+
+        let loanAmount = 3760000;
+        let annualInterestRate = 8.24;
+        let fixedEMI = 31000;
+        
+        let { data: chartData, totalInterest, totalMonths } = generateChartData(loanAmount, annualInterestRate, fixedEMI);
+        document.getElementById("totalEMIs").innerText = totalMonths;
+
+        let labels = chartData.map(d => d.month);
+        let balanceData = chartData.map(d => d.balance);
+        let interestData = chartData.map(d => d.interest);
+
+        let ctx = document.getElementById('loanChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Remaining Loan Balance',
+                        data: balanceData,
+                        borderColor: 'blue',
+                        fill: false
+                    },
+                    {
+                        label: 'Monthly Interest Payment',
+                        data: interestData,
+                        borderColor: 'red',
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { title: { display: true, text: 'Months' } },
+                    y: { title: { display: true, text: 'Amount (₹)' } }
+                }
+            }
+        });
+
+        let pieCtx = document.getElementById('pieChart').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Principal Amount', 'Total Interest'],
+                datasets: [{
+                    data: [loanAmount, totalInterest],
+                    backgroundColor: ['#4CAF50', '#FF5733']
+                }]
+            },
+            options: {
+                responsive: true,
+            }
+        });
+    </script>
+</body>
+</html>
